@@ -1,23 +1,34 @@
 canvas = document.getElementById("myCanvas");
-var CTX = canvas.getContext("2d");
+ctx.getContext("2d");
+greencar_width = 75;
+greencar_height = 100;
 
-img_width = 300;
-img_height = 100;
+background_image = "parkingLot.jpg";
+greencar_image = "car2.png";
 
-var img_image;
-
-img_x = 100;
-img_y = 100;
+greencar_x = 5;
+greencar_y = 225;
 
 function add() {
-	img_imgTag = new Image(); //defining a variable with a new image
-	img_imgTag.onload = uploadimg; // setting a function, onloading this variable
-	img_imgTag.src = img_image;   // load image
+	background_img = new Image();
+    background_img.onload = upload_background;
+    background_img.src = background_image;
+
+    greencar_img = new Image();
+    greencar_img.onload = upload_greencar;
+    greencar_img.src = greencar_image;
 }
 
-function uploadimg() {
+function uploadbackground() {
+	function upload_background() {
+		ctx.drawImage(background_img, 0, 0, canvas.width, canvas.height);
+	}
+}
 
-	ctx.drawImage(img_imgTag, img_x, img_y, img_width, img_height);
+function uploadgreencar() {
+	function upload_greencar() {
+		CTX.drawImage(greencar_img, greencar_x, greencar_y, greencar_width, greencar_height);
+	}
 }
 
 window.addEventListener("keydown", my_keydown);
@@ -26,39 +37,69 @@ function my_keydown(e)
 {
 	keyPressed = e.keyCode;
 	console.log(keyPressed);
-	
-		if((keyPressed >=97 && keyPressed<=122)|| (keyPressed >=65 && keyPressed<=90))
+		if(keyPressed == '38')
 		{
-			aplhabetkey();
-			document.getElementById("d1").innerHTML="You pressed Alphabet Key.";
-			console.log(aplhabetkey);
+			up();
+			console.log("up");
 		}
+	
+		if(keyPressed == '40')
+		{
+			down();
+			console.log("down");
 		}
-	else{
-		otherkey();
-		document.getElementById("d1").innerHTML="You pressed symbol or other key";
+		
+		if(keyPressed == '37')
+		{
+			left();
+			console.log("left");
+		}
+	
+		if(keyPressed == '39')
+		{
+			right();
+			console.log("right");
+		}
+		
+		
+}
+
+function up()
+{
+	if (greencar_y >= 0) {
+        greencar_y = greencar_y-10;
+        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
+        upload_background();
+        upload_greencar();
+    }
+}
+
+function down()
+{
+	if (greencar_y >= 0) {
+        greencar_y = greencar_y+10;
+        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
+        upload_background();
+        upload_greencar();
 	}
 }
 
-function aplhabetkey()
+function left()
 {
-	img_image="Alpkey.png"
-	add();
+	if (greencar_x >= 0) {
+        greencar_x = greencar_x-10;
+        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
+        upload_background();
+        upload_greencar();
+	}
 }
-function numberkey()
+
+function right()
 {
-	
+	if (greencar_x >= 0) {
+        greencar_x = greencar_x+10;
+        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
+        upload_background();
+        upload_greencar();
+	}
 }
-function arrowkey()
-{
-}
-function specialkey()
-{
-	
-}
-function otherkey()
-{
-	img_image="otherkey.png";
-	add();
-}
-	
