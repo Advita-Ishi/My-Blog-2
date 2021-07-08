@@ -1,5 +1,5 @@
 canvas = document.getElementById("myCanvas");
-ctx.getContext("2d");
+ctx = canvas.getContext("2d");
 greencar_width = 75;
 greencar_height = 100;
 
@@ -19,16 +19,15 @@ function add() {
     greencar_img.src = greencar_image;
 }
 
-function uploadbackground() {
-	function upload_background() {
+function upload_background() {
+	 
 		ctx.drawImage(background_img, 0, 0, canvas.width, canvas.height);
 	}
-}
 
-function uploadgreencar() {
-	function upload_greencar() {
-		CTX.drawImage(greencar_img, greencar_x, greencar_y, greencar_width, greencar_height);
-	}
+function upload_greencar() {
+	
+		ctx.drawImage(greencar_img, greencar_x, greencar_y, greencar_width, greencar_height);
+	
 }
 
 window.addEventListener("keydown", my_keydown);
@@ -76,7 +75,7 @@ function up()
 
 function down()
 {
-	if (greencar_y >= 0) {
+	if (greencar_y <= 250) {
         greencar_y = greencar_y+10;
         console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
         upload_background();
@@ -96,7 +95,7 @@ function left()
 
 function right()
 {
-	if (greencar_x >= 0) {
+	if (greencar_x <= 650) {
         greencar_x = greencar_x+10;
         console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
         upload_background();
