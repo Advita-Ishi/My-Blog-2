@@ -1,104 +1,101 @@
-canvas = document.getElementById("myCanvas");
-ctx = canvas.getContext("2d");
-greencar_width = 75;
-greencar_height = 100;
+var canvas = new fabric.Canvas("myCanvas");
 
-background_image = "parkingLot.jpg";
-greencar_image = "car2.png";
+block_width = 30;
+block_height = 30;
 
-greencar_x = 5;
-greencar_y = 225;
+player_x = 10;
+player_y = 10;
 
-function add() {
-	background_img = new Image();
-    background_img.onload = upload_background;
-    background_img.src = background_image;
+var player_img = "";
+var block_img = "";
 
-    greencar_img = new Image();
-    greencar_img.onload = upload_greencar;
-    greencar_img.src = greencar_image;
+function player_update() {
+    fabric.Image.fromURL("player.png", function(Img){
+        player_img = Img;
+
+        player_img.scaleToWidth(150);
+        player_img.scaleToHeight(150);
+        player_img.set({
+            top:player_y,
+            left:player_x
+        });
+        canvas.add(player_img);
+    });
 }
 
-function upload_background() {
-	 
-		ctx.drawImage(background_img, 0, 0, canvas.width, canvas.height);
-	}
+function newImg_update(get_image) {
+    fabric.Image.fromURL(get_image, function(Img){
+        block_img = Img;
 
-function upload_greencar() {
-	
-		ctx.drawImage(greencar_img, greencar_x, greencar_y, greencar_width, greencar_height);
-	
+        block_img.scaleToWidth(block_width);
+        block_img.scaleToHeight(block_height);
+        block_img.set({
+            top:player_y,
+            left:player_x
+        });
+        canvas.add(block_img);
+    });
 }
-
 window.addEventListener("keydown", my_keydown);
 
-function my_keydown(e)
-{
-	keyPressed = e.keyCode;
-	console.log(keyPressed);
-		if(keyPressed == '38')
-		{
-			up();
-			console.log("up");
-		}
-	
-		if(keyPressed == '40')
-		{
-			down();
-			console.log("down");
-		}
-		
-		if(keyPressed == '37')
-		{
-			left();
-			console.log("left");
-		}
-	
-		if(keyPressed == '39')
-		{
-			right();
-			console.log("right");
-		}
-		
-		
-}
-
-function up()
-{
-	if (greencar_y >= 0) {
-        greencar_y = greencar_y-10;
-        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
-        upload_background();
-        upload_greencar();
+function my_keydown(e){
+    keypressed = e.keyCode;
+    console.log(keypressed);
+    if(e.shiftKey == true && keypressed == "80"){
+        block_width = block_width + 10;
+        block_height = block_height + 10;
+        document.getElementById("width").innerHTML = block_width;
+        document.getElementById("height").innerHTML = block_height;
     }
+
+    if(e.shiftKey == true && keypressed == "77"){
+        block_width = block_width - 10;
+        block_height = block_height - 10;
+        document.getElementById("width").innerHTML = block_width;
+        document.getElementById("height").innerHTML = block_height;
+    }
+    if(keypressed == '67'){
+        newImg_update("cloud.jpg");
+    }
+    if(keypressed == '68'){
+        newImg_update("dark_green.png");
+    }
+    if(keypressed == '71'){
+        newImg_update("ground.png");
+    }
+    if(keypressed == '76'){
+        newImg_update("light_green.png");
+    }
+    if(keypressed == '82'){
+        newImg_update("roof.jpg");
+    }
+    if(keypressed == '84'){
+        newImg_update("trunk.jpg");
+    }
+    if(keypressed == '85'){
+        newImg_update("unique.png");
+    }
+    if(keypressed == '87'){
+        newImg_update("wall.jpg");
+    }
+    if(keypressed == '89'){
+        newImg_update("yellow_wall.png");
+    }
+    if(keypressed == '38'){
+        up();
+     }
+     if(keypressed == '40'){
+        down();
+     }
+     if(keypressed == '37'){
+        left();
+     }
+     if(keypressed == '39'){
+        right();
+     }
+    
+    
 }
 
-function down()
-{
-	if (greencar_y <= 250) {
-        greencar_y = greencar_y+10;
-        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
-        upload_background();
-        upload_greencar();
-	}
-}
 
-function left()
-{
-	if (greencar_x >= 0) {
-        greencar_x = greencar_x-10;
-        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
-        upload_background();
-        upload_greencar();
-	}
-}
 
-function right()
-{
-	if (greencar_x <= 650) {
-        greencar_x = greencar_x+10;
-        console.log("When up arrow is pressed, x = " + greencar_x + " | y = " + greencar_y);
-        upload_background();
-        upload_greencar();
-	}
-}
