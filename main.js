@@ -1,101 +1,64 @@
 var canvas = new fabric.Canvas("myCanvas");
+ block_y=1;
+ block_x=1;
 
-block_width = 30;
-block_height = 30;
+block_image_width = 350;
+block_image_height = 430;
 
-player_x = 10;
-player_y = 10;
+var block_image_object= "";
 
-var player_img = "";
-var block_img = "";
-
-function player_update() {
-    fabric.Image.fromURL("player.png", function(Img){
-        player_img = Img;
-
-        player_img.scaleToWidth(150);
-        player_img.scaleToHeight(150);
-        player_img.set({
-            top:player_y,
-            left:player_x
-        });
-        canvas.add(player_img);
-    });
-}
-
-function newImg_update(get_image) {
-    fabric.Image.fromURL(get_image, function(Img){
+function new_image(get_image)
+{
+	fabric.Image.fromURL(get_image, function(Img){
         block_img = Img;
 
-        block_img.scaleToWidth(block_width);
-        block_img.scaleToHeight(block_height);
+        block_img.scaleToWidth(block_image_width);
+        block_img.scaleToHeight(block_image_height);
         block_img.set({
-            top:player_y,
-            left:player_x
+            top:block_y,
+            left:block_x
         });
-        canvas.add(block_img);
+        canvas.add(block_image_object);
     });
 }
+
 window.addEventListener("keydown", my_keydown);
 
-function my_keydown(e){
-    keypressed = e.keyCode;
-    console.log(keypressed);
-    if(e.shiftKey == true && keypressed == "80"){
-        block_width = block_width + 10;
-        block_height = block_height + 10;
-        document.getElementById("width").innerHTML = block_width;
-        document.getElementById("height").innerHTML = block_height;
-    }
+function my_keydown(e)
+{
+keyPressed = e.keyCode;
+console.log(keyPressed);
 
-    if(e.shiftKey == true && keypressed == "77"){
-        block_width = block_width - 10;
-        block_height = block_height - 10;
-        document.getElementById("width").innerHTML = block_width;
-        document.getElementById("height").innerHTML = block_height;
-    }
-    if(keypressed == '67'){
-        newImg_update("cloud.jpg");
-    }
-    if(keypressed == '68'){
-        newImg_update("dark_green.png");
-    }
-    if(keypressed == '71'){
-        newImg_update("ground.png");
-    }
-    if(keypressed == '76'){
-        newImg_update("light_green.png");
-    }
-    if(keypressed == '82'){
-        newImg_update("roof.jpg");
-    }
-    if(keypressed == '84'){
-        newImg_update("trunk.jpg");
-    }
-    if(keypressed == '85'){
-        newImg_update("unique.png");
-    }
-    if(keypressed == '87'){
-        newImg_update("wall.jpg");
-    }
-    if(keypressed == '89'){
-        newImg_update("yellow_wall.png");
-    }
-    if(keypressed == '38'){
-        up();
-     }
-     if(keypressed == '40'){
-        down();
-     }
-     if(keypressed == '37'){
-        left();
-     }
-     if(keypressed == '39'){
-        right();
-     }
-    
-    
+	if(keyPressed == '82') 
+	{
+		new_image('rr1.png');
+		console.log("r")
+	}
+	if(keyPressed == '71')
+	{
+		block_x = 200;
+		new_image('gr.png');
+		console.log("g")
+	}
+	
+	if(keyPressed == '89')
+	{
+		block_x =350;
+		new_image('yr.png');
+		console.log("y")
+	}
+	if(keyPressed == '80')
+	{
+		block_x = 600;
+		new_image('pr.png');
+		console.log("p")
+	}
+	if(keyPressed == '66')
+	{
+		block_x = 700;
+		new_image('br.png');
+		console.log("b")
+	}
+	
 }
-
-
 
